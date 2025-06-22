@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div>
   <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python Logo" align="left" width="130" height="130">
   <h1>Python Interpreter</h1>
@@ -104,3 +105,6 @@ This project is under continuous development, with new features being added regu
  + Open a Pull Request.
 
 Any form of contribution is welcome, whether it’s code, documentation, or testing. Additionally, feel free to share this project with friends, colleagues, or within developer communities.
+=======
+# python-interpreter
+>>>>>>> 024ae88de0cba18165941d35b8094669342ab439
