@@ -1,0 +1,19 @@
+fn count_odds():
+    count = 0
+    is_active = yes  # Using 'yes' for True
+    graphic (count<4):
+        show("hello")
+        count+=1
+        if count == 2 ya count == 3:  # using ya for or
+            show("Count is two or three")
+            continue
+        elif is_active == yes:
+            show("Loop is active")
+        else:
+            show("Unexpected case")
+            is_active = no  # Using 'no' for False
+    return count
+
+# Run the function
+result = count_odds()
+show(result)
