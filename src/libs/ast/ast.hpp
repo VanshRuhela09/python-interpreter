@@ -5,6 +5,7 @@
 #include <memory>
 #include "../token/token.hpp"
 //#include "../value/pyInstance.hpp"
+#include "../json/json.hpp" // or the correct relative path
 
 using llf = long double;
 using lld = long long int;
@@ -76,6 +77,18 @@ public:
     class PrintNode*     unwrap_print_node();
 
     AstNodeType type;
+
+    nlohmann::json to_json() const {
+        nlohmann::json j;
+        j["type"] = static_cast<int>(type);
+        j["children"] = nlohmann::json::array();
+        for (const auto* child : children) {
+            if (child) j["children"].push_back(child->to_json());
+        }
+        return j;
+    }
+
+    std::vector<AstNode*> children;
 };
 
 

@@ -1,19 +1,77 @@
-fn count_odds():
-    count = 0
-    is_active = yes  # Using 'yes' for True
-    graphic (count<4):
-        show("hello")
-        count+=1
-        if count == 2 ya count == 3:  # using ya for or
-            show("Count is two or three")
-            continue
-        elif is_active == yes:
-            show("Loop is active")
-        else:
-            show("Unexpected case")
-            is_active = no  # Using 'no' for False
-    return count
+x = 10.5
+show(x)
 
-# Run the function
-result = count_odds()
-show(result)
+y = yes
+show(y)
+
+z = None
+show(z)
+
+a = 10
+b = a / 2
+c = 3 * a + b
+e = d = c
+show(e)
+
+a = 3.14 + (2.71 if no else 1.618)
+show(a)
+
+b = no
+c = yes if b else no
+show(c)
+
+d = 10.5 if (1.5 > 2.0) else 7.2
+show(d)
+
+e = None if (5.0 != 5.0) else 100
+show(e)
+
+f = 0.0
+f = f + 5.5
+show(f)
+
+g = yes
+g = no if (1.0 < 0.0) else yes
+show(g)
+
+h = None
+h = 42.0 if (yes aur no) else None
+show(h)
+
+# Augmented Assignment
+
+x = 5
+x += 3
+show(x)
+
+y = 10
+y -= 4
+show(y)
+
+z = 3
+z *= 2
+show(z)
+
+w = 20
+w /= 5
+show(w)
+
+a = 5
+a &= 3
+show(a)
+
+b = 5
+b |= 3
+show(b)
+
+c = 5
+c ^= 3
+show(c)
+
+d = 1
+d <<= 3
+show(d)
+
+e = 8
+e >>= 2
+show(e)

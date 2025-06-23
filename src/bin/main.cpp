@@ -1,10 +1,12 @@
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
 #include "../libs/lexer/lexer.hpp"
 #include "../libs/parser/parser.hpp"
 #include "../libs/ast/ast.hpp"
 #include "../libs/interpreter/interpreter.hpp"
+#include "../libs/json/json.hpp"
 
 #pragma GCC optimize("Ofast")
 #pragma GCC target("avx,avx2,fma")
@@ -22,12 +24,14 @@ int main(int argc, char* argv[]) {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(nullptr); std::cout.tie(nullptr);
 
-    if (argc != 2) {
-        std::cerr << "Usage: " << argv[0] << " [filename].py\n";
+    if (argc < 2) {
+        std::cout << "Usage: ./main [filename].my [--dump-ast]" << std::endl;
         return 1;
     }
 
-    const char* const filename = argv[1];
+    std::string filename = argv[1];
+    bool dump_ast = (argc > 2 && std::string(argv[2]) == "--dump-ast");
+
     std::ifstream inputFile(filename);
 
     if (!inputFile) {
@@ -47,7 +51,14 @@ int main(int argc, char* argv[]) {
         #endif
 
         Parser parser(tokens);
-        ProgramNode* root = parser.parse();
+        auto root = parser.parse();
+
+        if (dump_ast) {
+            // Output AST as JSON
+            nlohmann::json ast_json = root->to_json();
+            std::cout << ast_json.dump(2) << std::endl;
+            return 0;
+        }
 
         Interpreter interpreter;
         interpreter.interpret(root);

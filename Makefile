@@ -1,11 +1,9 @@
 # Detect OS
 ifeq ($(OS),Windows_NT)
     # Windows settings
-    SRCS := $(shell powershell -Command "Get-ChildItem -Recurse -Filter *.cpp | Select-Object -ExpandProperty FullName" | tr '\r\n' ' ')
     OUTPUT := main.exe
 else
     # Unix-like settings (Linux, macOS, etc.)
-    SRCS := $(shell find . -name "*.cpp")
     OUTPUT := main
 endif
 
@@ -18,6 +16,24 @@ ifdef DEBUG
 CFLAGS += -DDEBUG -Wall -Wextra -g
 CFLAGS += -Wno-unused-variable -Wno-unused-parameter -Wno-reorder
 endif
+
+SRCS = ./src/bin/main.cpp \
+       ./src/libs/interpreter/interpreter.cpp \
+       ./src/libs/lexer/lexer.cpp \
+       ./src/libs/value/pyStr.cpp \
+       ./src/libs/value/pyFloat.cpp \
+       ./src/libs/value/pyInstance.cpp \
+       ./src/libs/value/pyClass.cpp \
+       ./src/libs/value/pyNone.cpp \
+       ./src/libs/value/pyFunction.cpp \
+       ./src/libs/value/pyObject.cpp \
+       ./src/libs/value/pyInt.cpp \
+       ./src/libs/value/pyBool.cpp \
+       ./src/libs/value/pyBuiltin.cpp \
+       ./src/libs/scope/scope.cpp \
+       ./src/libs/parser/parser.cpp \
+       ./src/libs/ast/ast.cpp \
+       ./src/libs/gc/gc.cpp
 
 # Build rule
 build: $(OUTPUT)
