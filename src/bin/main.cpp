@@ -14,7 +14,7 @@
 #ifdef DEBUG
 inline void show_tokens(const std::vector<Token>& tokens) {
     for (const auto& token : tokens) {
-        std::cout << token << '\n';
+        std::cout << token << std::endl;
     }
     std::cout << std::flush;
 }
@@ -52,6 +52,14 @@ int main(int argc, char* argv[]) {
 
         Parser parser(tokens);
         auto root = parser.parse();
+
+        // while (!parser.isAtEnd()) {
+        //     AstNode* stmt = parser.parseStmt();
+        //     if (stmt) {
+        //         std::cout << "Parsed a statement\n";
+        //         root->statements.push_back(stmt);
+        //     }
+        // }
 
         if (dump_ast) {
             // Output AST as JSON

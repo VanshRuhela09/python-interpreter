@@ -7,19 +7,13 @@ ProgramNode* Parser::parse() {
 }
 
 ProgramNode* Parser::parseProgram() {
-    /*
-     *   program ::= (statement | NEWLINE)* $
-    */
     std::vector<AstNode*> statements;
     while (!isAtEnd()) {
-        if(match(TokenType::Newline)){
-            continue;
-        } else {
-            statements.push_back(parseStmt());
-        }
+        AstNode* stmt = parseStmt();
+        if (stmt) statements.push_back(stmt);
     }
-    BlockNode* block = new BlockNode(statements);
-    return new ProgramNode(block);
+    auto body = new BlockNode(statements);
+    return new ProgramNode(body);
 }
 
 AstNode* Parser::parseStmt() {

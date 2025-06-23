@@ -1,1 +1,5 @@
-print("hello")
+x = 10.5
+show(x)
+
+y = yes
+show(y)

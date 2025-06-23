@@ -78,7 +78,7 @@ public:
 
     AstNodeType type;
 
-    nlohmann::json to_json() const {
+    virtual nlohmann::json to_json() const {
         nlohmann::json j;
         j["type"] = static_cast<int>(type);
         j["children"] = nlohmann::json::array();
@@ -115,6 +115,16 @@ public:
     std::vector<AstNode*> statements;
     
     virtual PyObject* accept(NodeVisitor* visitor) override;
+
+    nlohmann::json to_json() const override {
+        nlohmann::json j;
+        j["type"] = static_cast<int>(type);
+        j["children"] = nlohmann::json::array();
+        for (auto* stmt : statements) {
+            if (stmt) j["children"].push_back(stmt->to_json());
+        }
+        return j;
+    }
 };
 
 
@@ -128,6 +138,14 @@ public:
     BlockNode* body;
     
     virtual PyObject* accept(NodeVisitor* visitor) override;
+
+    nlohmann::json to_json() const override {
+        nlohmann::json j;
+        j["type"] = static_cast<int>(type);
+        j["children"] = nlohmann::json::array();
+        if (body) j["children"].push_back(body->to_json());
+        return j;
+    }
 };
 
 
